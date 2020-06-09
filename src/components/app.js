@@ -32,15 +32,15 @@ export default class App extends Component {
   }
 
   handleUnsuccessfulLogin() {
-    this.setState({
-      loggedInStatus: "NOT_LOGGED_IN"
-    });
+    // this.setState({
+    //   loggedInStatus: "NOT_LOGGED_IN"
+    // });
   }
 
   handleSuccessfulLogout() {
-    this.setState({
-      loggedInStatus: "NOT_LOGGED_IN"
-    });
+    // this.setState({
+    //   loggedInStatus: "NOT_LOGGED_IN"
+    // });
   }
 
   authorizedPages(){
