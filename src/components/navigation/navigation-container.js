@@ -6,6 +6,13 @@ import Logo from "../../../static/assets/images/logo/journalLogo.png"
 
 const NavigationContainer = props => {
 
+    const handleSignOut = (event) => {
+        event.preventDefault();
+        props.handleSuccessfulLogout()
+        localStorage.removeItem('loggedInStatus')
+        props.history.push('/')
+    }
+
     return (
         <div className="nav-wrapper">
             <div className="logo">
@@ -13,7 +20,7 @@ const NavigationContainer = props => {
                     <img src={Logo}/>
                 </NavLink>
             </div>
-                {props.loggedInStatus === 'Logged_In' ? (
+                {localStorage.getItem('loggedInStatus') ? (
                         <div>
                             <div className='nav-link'>
                                 <NavLink to="/entries" activeClassName='nav-link-active'>
@@ -29,16 +36,22 @@ const NavigationContainer = props => {
                 ): null}
 
             <div className="right-side">
-                <div className='nav-link'>
-                    <NavLink to="/auth" activeClassName='nav-link-active'>
-                        Sign in
-                    </NavLink>
+                {localStorage.getItem('loggedInStatus')? (
+                    <a onClick={handleSignOut}>Logout</a>
+                ):(
+                <div className="signin-signup">
+                    <div className='nav-link'>
+                        <NavLink to="/auth" activeClassName='nav-link-active'>
+                            Sign in
+                        </NavLink>
+                    </div>
+                    <div className='nav-link'>
+                        <NavLink to="/register" activeClassName='nav-link-active'>
+                            Sign up
+                        </NavLink>
+                    </div>
                 </div>
-                <div className='nav-link'>
-                    <NavLink to="/register" activeClassName='nav-link-active'>
-                        Sign up
-                    </NavLink>
-                </div>
+                )}
             </div>
         </div>
     );

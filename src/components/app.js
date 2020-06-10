@@ -38,9 +38,7 @@ export default class App extends Component {
   }
 
   handleSuccessfulLogout() {
-    // this.setState({
-    //   loggedInStatus: "NOT_LOGGED_IN"
-    // });
+    console.log('logged out')
   }
 
   authorizedPages(){
@@ -67,7 +65,6 @@ export default class App extends Component {
   // }
 
   render() {
-    console.log(this.state)
     return (
       <div className='app'>
         <Router>
@@ -85,12 +82,18 @@ export default class App extends Component {
                   handleSuccessfulLogin={this.handleSuccessfulLogin}
                   handleUnsuccessfulLogin={this.handleUnsuccessfulLogin}
                 />
+              )}/>
+                {localStorage.getItem('loggedInStatus') ? (
+                  this.authorizedPages()
+                ): null}
+              <Route path="/register" render={props => (
+                <Register
+                  {...props}
+                  handleSuccessfulLogin={this.handleSuccessfulLogin}
+                  handleUnsuccessfulLogin={this.handleUnsuccessfulLogin}
+                />
               )} />
-              <Route path="/register" component={Register} />
 
-              {localStorage.getItem('loggedInStatus') ? (
-                this.authorizedPages()
-              ): null}
               
               <Route component={NoMatch} />
             </Switch>
